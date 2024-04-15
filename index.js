@@ -3,6 +3,7 @@ import mysql from 'mysql';
 import empleadosRouter from './src/routes/empleados.router.js'
 import __dirname from './utils.js';
 import cors from 'cors';
+import config from './config/config.js';
 
 //init
 const app = express();
@@ -10,15 +11,16 @@ app.use(cors());
 
 //DB mysql
 const db = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '123456',
-  database: 'empleados_crud'
+  host: config.sql.HOST,
+  user: config.sql.USER,
+  password: config.sql.PASSWORD,
+  database: config.sql.DATABASE
 })
 
 //port
-app.listen(3001, () => {
-  console.log('Corriendo en el puerto 3001');
+const PORT = config.app.PORT || 8080;
+app.listen(PORT, () => {
+  console.log(`Corriendo en el puerto ${PORT}`);
 })
 
 //utils
