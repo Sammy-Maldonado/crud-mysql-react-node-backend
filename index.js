@@ -7,7 +7,9 @@ import config from './config/config.js';
 
 //init
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: config.react.BASEURL,
+}));
 
 //DB mysql
 const db = mysql.createConnection({
