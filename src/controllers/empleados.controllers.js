@@ -29,7 +29,7 @@ const createEmpleados = (req, res) => {
       throw new Error('Todos los campos son obligatorios');
     }
 
-    //Los "?" indican que yo voy a prometer enviar estos valores más adelante.
+    //Los "?" indican que yo voy a prometer enviar estos valores más adelante. solo aplica en mssql.
     //Luego pongo los 5 valores en un array para que sean los que se capturan por la solicitud req.
     pool.query('INSERT INTO empleados(nombre, edad, pais, cargo, anios) VALUES($1, $2, $3, $4, $5)', [nombre, edad, pais, cargo, anios],
 
@@ -87,7 +87,7 @@ const deleteEmpleados = (req, res) => {
     }
 
     //Los valores en el array (datos que se solicitan) deben estar en el mismo orden que en el update
-    pool.query('DELETE FROM empleados WHERE id=$1', id,
+    pool.query('DELETE FROM empleados WHERE id=$1', [id],
 
       //captura de error y resultado
       (err, result) => {
