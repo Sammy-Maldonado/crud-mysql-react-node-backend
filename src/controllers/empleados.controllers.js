@@ -31,7 +31,7 @@ const createEmpleados = (req, res) => {
 
     //Los "?" indican que yo voy a prometer enviar estos valores más adelante.
     //Luego pongo los 5 valores en un array para que sean los que se capturan por la solicitud req.
-    pool.query('INSERT INTO empleados(nombre, edad, pais, cargo, anios) VALUES(?,?,?,?,?)', [nombre, edad, pais, cargo, anios],
+    pool.query('INSERT INTO empleados(nombre, edad, pais, cargo, anios) VALUES($1, $2, $3, $4, $5)', [nombre, edad, pais, cargo, anios],
 
       //captura de error y resultado
       (err, result) => {
@@ -59,7 +59,7 @@ const updateEmpleados = (req, res) => {
     }
 
     //Los valores en el array (datos que se solicitan) deben estar en el mismo orden que en el update
-    pool.query('UPDATE empleados SET nombre=?, edad=?, pais=?, cargo=?, anios=? WHERE id=?', [nombre, edad, pais, cargo, anios, id],
+    pool.query('UPDATE empleados SET nombre=$1, edad=$2, pais=$3, cargo=$4, anios=$5 WHERE id=$6', [nombre, edad, pais, cargo, anios, id],
 
       //captura de error y resultado
       (err, result) => {
@@ -87,7 +87,7 @@ const deleteEmpleados = (req, res) => {
     }
 
     //Los valores en el array (datos que se solicitan) deben estar en el mismo orden que en el update
-    pool.query('DELETE FROM empleados WHERE id=?', id,
+    pool.query('DELETE FROM empleados WHERE id=$1', id,
 
       //captura de error y resultado
       (err, result) => {
