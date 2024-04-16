@@ -21,7 +21,8 @@ export default {
     HOST: process.env.SQL_HOST || 'localhost:27017',
     USER: process.env.SQL_USER || 'root',
     PASSWORD: process.env.SQL_PASSWORD || 'root',
-    DATABASE: process.env.SQL_DATABASE_NAME || 'ecommerce'
+    DATABASE_NAME: process.env.SQL_DATABASE_NAME || 'ecommerce',
+    DATABASE_URL:process.env.SQL_DATABASE_URL || 'localhost:8080'
   },
   react: {
     BASEURL: process.env.VITE_FRONT_URL

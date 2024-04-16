@@ -1,9 +1,9 @@
-import db from '../../index.js';
+import pool from '../../index.js';
 
 const listarEmpleados = (req, res) => {
   try {
 
-    db.query('SELECT * FROM empleados',
+    pool.query('SELECT * FROM empleados',
       //captura de error y resultado
       (err, result) => {
         if (err) {
@@ -31,7 +31,7 @@ const createEmpleados = (req, res) => {
 
     //Los "?" indican que yo voy a prometer enviar estos valores más adelante.
     //Luego pongo los 5 valores en un array para que sean los que se capturan por la solicitud req.
-    db.query('INSERT INTO empleados(nombre, edad, pais, cargo, anios) VALUES(?,?,?,?,?)', [nombre, edad, pais, cargo, anios],
+    pool.query('INSERT INTO empleados(nombre, edad, pais, cargo, anios) VALUES(?,?,?,?,?)', [nombre, edad, pais, cargo, anios],
 
       //captura de error y resultado
       (err, result) => {
@@ -59,7 +59,7 @@ const updateEmpleados = (req, res) => {
     }
 
     //Los valores en el array (datos que se solicitan) deben estar en el mismo orden que en el update
-    db.query('UPDATE empleados SET nombre=?, edad=?, pais=?, cargo=?, anios=? WHERE id=?', [nombre, edad, pais, cargo, anios, id],
+    pool.query('UPDATE empleados SET nombre=?, edad=?, pais=?, cargo=?, anios=? WHERE id=?', [nombre, edad, pais, cargo, anios, id],
 
       //captura de error y resultado
       (err, result) => {
@@ -87,7 +87,7 @@ const deleteEmpleados = (req, res) => {
     }
 
     //Los valores en el array (datos que se solicitan) deben estar en el mismo orden que en el update
-    db.query('DELETE FROM empleados WHERE id=?', id,
+    pool.query('DELETE FROM empleados WHERE id=?', id,
 
       //captura de error y resultado
       (err, result) => {

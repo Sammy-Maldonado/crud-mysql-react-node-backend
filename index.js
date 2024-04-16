@@ -4,20 +4,28 @@ import empleadosRouter from './src/routes/empleados.router.js'
 import __dirname from './utils.js';
 import cors from 'cors';
 import config from './config/config.js';
+import pg from 'pg';
 
 //init
 const app = express();
+
 app.use(cors({
   origin: config.react.BASEURL,
+  credentials: true
 }));
 
-//DB mysql
-const db = mysql.createConnection({
+//DB Deploy
+const pool = new pg.Pool({
+  connectionString: config.sql.DATABASE_URL,  //Esta string de conexion tiene todos los datos necesarios para poder conectarse usando PostgreSQL.
+})
+
+//DB mysql local
+/* const db = mysql.createConnection({
   host: config.sql.HOST,
   user: config.sql.USER,
   password: config.sql.PASSWORD,
-  database: config.sql.DATABASE
-})
+  database: config.sql.DATABASE_NAME
+}) */
 
 //port
 const PORT = config.app.PORT || 8080;
@@ -34,4 +42,4 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/empleados', empleadosRouter);
 
 
-export default db;
+export default pool;  //se puede exportar db para usar la BD local
